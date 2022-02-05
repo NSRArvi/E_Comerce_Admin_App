@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        tools:context=".adminLoginFragment">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome Admin"
+            android:gravity="center"
+            android:textColor="#4CAF50"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/emailEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/custom_et"
+            android:padding="10dp"
+            android:inputType="textPersonName"
+            android:hint="Email" />
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_baseline_security_24"
+            android:drawablePadding="5dp"
+            android:id="@+id/passwordEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:padding="10dp"
+            android:background="@drawable/custom_et"
+            android:inputType="textPersonName"
+            android:hint="Password" />
+
+        <Button
+            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginTop="20dp"
+            android:text="Sign in" />
+
+        <TextView
+            android:id="@+id/errorTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error!"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+</layout>
