@@ -1,4 +1,4 @@
-package com.example.e_comerce_admin.Adapters;
+package com.example.e_comerce_admin.adapters;
 
 import android.widget.ImageView;
 

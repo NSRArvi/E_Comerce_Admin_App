@@ -6,15 +6,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-import com.example.e_comerce_admin.Adapters.DashboardAdapter;
-import com.example.e_comerce_admin.CallBacks.OnDashboardItemSelectedListener;
-import com.example.e_comerce_admin.Models.DashboardItem;
-import com.example.e_comerce_admin.ViewModels.LoginViewModel;
+import com.example.e_comerce_admin.adapters.DashboardAdapter;
+import com.example.e_comerce_admin.callbacks.OnDashboardItemSelectedListener;
+import com.example.e_comerce_admin.models.DashboardItem;
+import com.example.e_comerce_admin.viewmodels.LoginViewModel;
 import com.example.e_comerce_admin.databinding.FragmentDashboardBinding;
 import com.example.e_comerce_admin.utils.Constants;
 
@@ -40,9 +42,8 @@ public class dashboardFragment extends Fragment implements OnDashboardItemSelect
                 });
         final DashboardAdapter adapter = new DashboardAdapter(this,
                 DashboardItem.getDashboardItems());
-        final GridLayoutManager glm = new GridLayoutManager(getActivity(),
-                2);
-        binding.dashboardRv.setLayoutManager(glm);
+        final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        binding.dashboardRv.setLayoutManager(llm);
         binding.dashboardRv.setAdapter(adapter);
         return binding.getRoot();
     }

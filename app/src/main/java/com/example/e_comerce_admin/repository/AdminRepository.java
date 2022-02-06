@@ -1,13 +1,8 @@
-package com.example.e_comerce_admin.Repository;
+package com.example.e_comerce_admin.repository;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.example.e_comerce_admin.CallBacks.OnCheckAdminListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.example.e_comerce_admin.callbacks.OnCheckAdminListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AdminRepository {

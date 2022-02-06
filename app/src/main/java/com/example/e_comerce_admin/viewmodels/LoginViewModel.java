@@ -1,11 +1,10 @@
-package com.example.e_comerce_admin.ViewModels;
+package com.example.e_comerce_admin.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.e_comerce_admin.CallBacks.OnCheckAdminListener;
-import com.example.e_comerce_admin.Repository.AdminRepository;
+import com.example.e_comerce_admin.repository.AdminRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

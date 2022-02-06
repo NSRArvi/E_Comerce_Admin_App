@@ -1,4 +1,4 @@
-package com.example.e_comerce_admin.Models;
+package com.example.e_comerce_admin.models;
 
 public class ProductModel {
     private String productId;

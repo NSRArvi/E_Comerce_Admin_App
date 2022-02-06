@@ -1,4 +1,4 @@
-package com.example.e_comerce_admin.Adapters;
+package com.example.e_comerce_admin.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.e_comerce_admin.CallBacks.OnDashboardItemSelectedListener;
-import com.example.e_comerce_admin.Models.DashboardItem;
+import com.example.e_comerce_admin.callbacks.OnDashboardItemSelectedListener;
+import com.example.e_comerce_admin.models.DashboardItem;
 import com.example.e_comerce_admin.databinding.DashboardItemRowBinding;
 
 import java.util.List;

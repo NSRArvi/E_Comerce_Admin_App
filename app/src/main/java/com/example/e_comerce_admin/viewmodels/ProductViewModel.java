@@ -1,21 +1,17 @@
-package com.example.e_comerce_admin.ViewModels;
+package com.example.e_comerce_admin.viewmodels;
 
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.e_comerce_admin.Models.ProductModel;
-import com.example.e_comerce_admin.Models.PurchaseModel;
+import com.example.e_comerce_admin.models.ProductModel;
+import com.example.e_comerce_admin.models.PurchaseModel;
 import com.example.e_comerce_admin.utils.Constants;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
 

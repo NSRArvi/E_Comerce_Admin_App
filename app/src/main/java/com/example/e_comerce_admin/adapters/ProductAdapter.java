@@ -1,4 +1,4 @@
-package com.example.e_comerce_admin.Adapters;
+package com.example.e_comerce_admin.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.e_comerce_admin.CallBacks.OnProductItemClickListener;
-import com.example.e_comerce_admin.Models.ProductModel;
+import com.example.e_comerce_admin.callbacks.OnProductItemClickListener;
+import com.example.e_comerce_admin.models.ProductModel;
 import com.example.e_comerce_admin.databinding.ProductRowBinding;
 
 

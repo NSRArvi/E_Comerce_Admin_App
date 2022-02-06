@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.e_comerce_admin.Models.PurchaseModel;
-import com.example.e_comerce_admin.ViewModels.ProductViewModel;
+import com.example.e_comerce_admin.models.PurchaseModel;
+import com.example.e_comerce_admin.viewmodels.ProductViewModel;
 import com.example.e_comerce_admin.databinding.FragmentProductDetailsBinding;
 
 

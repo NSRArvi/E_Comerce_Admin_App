@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.example.e_comerce_admin.Adapters.ProductAdapter;
-import com.example.e_comerce_admin.CallBacks.OnProductItemClickListener;
-import com.example.e_comerce_admin.ViewModels.ProductViewModel;
+import com.example.e_comerce_admin.adapters.ProductAdapter;
+import com.example.e_comerce_admin.callbacks.OnProductItemClickListener;
+import com.example.e_comerce_admin.viewmodels.ProductViewModel;
 import com.example.e_comerce_admin.databinding.FragmentProductListBinding;
 
 import java.util.ArrayList;

@@ -26,9 +26,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.e_comerce_admin.Models.ProductModel;
-import com.example.e_comerce_admin.Models.PurchaseModel;
-import com.example.e_comerce_admin.ViewModels.ProductViewModel;
+import com.example.e_comerce_admin.models.ProductModel;
+import com.example.e_comerce_admin.models.PurchaseModel;
+import com.example.e_comerce_admin.viewmodels.ProductViewModel;
 import com.example.e_comerce_admin.databinding.FragmentAddProductBinding;
 import com.example.e_comerce_admin.pickers.DatePickerDialogFragment;
 import com.example.e_comerce_admin.utils.Constants;

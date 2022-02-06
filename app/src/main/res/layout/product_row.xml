@@ -5,7 +5,7 @@
     <data>
         <variable
             name="product"
-            type="com.example.e_comerce_admin.Models.ProductModel" />
+            type="com.example.e_comerce_admin.models.ProductModel" />
     </data>
 
     <androidx.cardview.widget.CardView
