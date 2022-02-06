@@ -2,63 +2,71 @@ package com.example.e_comerce_admin;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link productDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.e_comerce_admin.Models.PurchaseModel;
+import com.example.e_comerce_admin.ViewModels.ProductViewModel;
+import com.example.e_comerce_admin.databinding.FragmentProductDetailsBinding;
+
+
 public class productDetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public productDetailsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment productDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static productDetailsFragment newInstance(String param1, String param2) {
-        productDetailsFragment fragment = new productDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private FragmentProductDetailsBinding binding;
+    private ProductViewModel productViewModel;
+    private String productId;
+    public productDetailsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_details, container, false);
+        binding = FragmentProductDetailsBinding.inflate(inflater);
+        productViewModel = new ViewModelProvider(requireActivity())
+                .get(ProductViewModel.class);
+        productId = getArguments().getString("pid");
+        productViewModel.getProductByProductId(productId)
+                .observe(getViewLifecycleOwner(), productModel -> {
+                    binding.setProduct(productModel);
+                });
+        productViewModel.getPurchasesByProductId(productId)
+                .observe(getViewLifecycleOwner(), purchaseModels -> {
+                    String purchaseHistory = "";
+                    for (PurchaseModel p : purchaseModels) {
+                        purchaseHistory += "Purchased on: " +
+                                p.getPurchaseDate()+"\n"+
+                                "for BDT "+p.getPurchasePrice()+"\n"+
+                                "with quantity: "+p.getPurchaseQuantity()+"\n\n";
+                        binding.purchaseHistory.setText(purchaseHistory);
+                    }
+                });
+        binding.updatePriceBtn.setOnClickListener(v -> {
+            showUpdatePriceAlertDialog();
+        });
+        return binding.getRoot();
+
+    }
+
+    private void showUpdatePriceAlertDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Update Price");
+        final EditText editText = new EditText(getActivity());
+        editText.setHint("Enter new price");
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(editText);
+        builder.setPositiveButton("Update", (dialog, which) -> {
+            final String price = editText.getText().toString();
+            //validate
+            productViewModel.updateProductPrice(productId, Double.parseDouble(price));
+        });
+        builder.setNegativeButton("Cancel", null);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

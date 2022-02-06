@@ -3,62 +3,83 @@ package com.example.e_comerce_admin;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link productListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class productListFragment extends Fragment {
+import com.example.e_comerce_admin.Adapters.ProductAdapter;
+import com.example.e_comerce_admin.CallBacks.OnProductItemClickListener;
+import com.example.e_comerce_admin.ViewModels.ProductViewModel;
+import com.example.e_comerce_admin.databinding.FragmentProductListBinding;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public productListFragment() {
-        // Required empty public constructor
-    }
+public class productListFragment extends Fragment
+    implements OnProductItemClickListener {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment productListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static productListFragment newInstance(String param1, String param2) {
-        productListFragment fragment = new productListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentProductListBinding binding;
+    private ProductViewModel productViewModel;
+    private String category;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
+    public productListFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_list, container, false);
+        binding = FragmentProductListBinding.inflate(inflater);
+        productViewModel = new ViewModelProvider(requireActivity())
+                .get(ProductViewModel.class);
+        final ProductAdapter adapter = new ProductAdapter(this);
+        binding.productRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.productRV.setAdapter(adapter);
+        productViewModel.productListLiveData.observe(getViewLifecycleOwner(),
+                productList -> {
+                    adapter.submitList(productList);
+                });
+        productViewModel.categoryListLiveData.observe(
+                getViewLifecycleOwner(), catList -> {
+                    final List<String> categories = new ArrayList<>();
+                    categories.add("All");
+                    categories.addAll(catList);
+                    final ArrayAdapter<String> spinnerAdapter =
+                            new ArrayAdapter<String>(getActivity(),
+                                    android.R.layout.simple_dropdown_item_1line,
+                                    categories);
+                    binding.searchCategorySP.setAdapter(spinnerAdapter);
+                });
+
+        binding.searchCategorySP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    category = parent.getItemAtPosition(position).toString();
+                    productViewModel.getAllProductsByCategory(category);
+                }else {
+                    productViewModel.getAllProducts();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        return binding.getRoot();
+    }
+    @Override
+    public void onProductItemClicked(String productId) {
+        final Bundle bundle = new Bundle();
+        bundle.putString("pid", productId);
+        Navigation.findNavController(getActivity(), R.id.fragmentContainerView)
+                .navigate(R.id.action_productListFragment_to_productDetailsFragment, bundle);
     }
 }
