@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">E_Comerce_Admin</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="pending">Pending</string>
+    <string name="delivered">Delivered</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
